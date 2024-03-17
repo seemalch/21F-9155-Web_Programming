@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+    }
+    
+    .container {
+        text-align: center;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    #result {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+    
+    #score {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="background-color: rgb(45, 80, 115);color:white;border:1px solid black">Rock Paper Scissors</h1>
+        <div id="game">
+            <div class="options">
+                <button style="background-color: rgb(45, 80, 115);color:white;border-radius:5px" class="btn" data-choice="rock">Rock</button>
+                <button class="btn" style="background-color: rgb(45, 80, 115);color:white;border-radius:5px" data-choice="paper">Paper</button>
+                <button style="background-color: rgb(45, 80, 115);color:white;border-radius:5px" class="btn" data-choice="scissors">Scissors</button>
+            </div>
+            <div id="result"></div>
+            <div id="score" style="background-color: rgb(45, 80, 115);color:white;">Score: <span id="player-score">0</span> - <span id="computer-score">0</span></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>$(document).ready(function() {
+        var choices = ['rock', 'paper', 'scissors'];
+        var playerScore = 0;
+        var computerScore = 0;
+    
+        $('.btn').click(function() {
+            var playerChoice = $(this).data('choice');
+            var computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    
+            $('#result').text('You choose ' + playerChoice + ', computer choose ' + computerChoice + '.');
+    
+            var result = determineWinner(playerChoice, computerChoice);
+            if (result === 'win') {
+                playerScore++;
+            } else if (result === 'lose') {
+                computerScore++;
+            }
+    
+            $('#player-score').text(playerScore);
+            $('#computer-score').text(computerScore);
+        });
+    
+        function determineWinner(playerChoice, computerChoice) {
+            if (playerChoice === computerChoice) {
+                return 'tie';
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                return 'win';
+            } else {
+                return 'lose';
+            }
+        }
+    });
+    </script>
+</body>
+</html>
