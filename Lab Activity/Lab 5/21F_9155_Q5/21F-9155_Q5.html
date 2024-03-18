@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Class and ID of Clicked Element</title>
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .example {
+            color: rgb(229, 25, 83);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div id="s1" class="example">Element 1</div>
+<div id="s2" class="example">Element 2</div>
+<div id="s3" class="example">Element 3</div>
+
+<script>
+    $(document).ready(function(){
+        // Attach click event handler to all elements with the class "example-class"
+        $(".example").click(function(){
+            var clickedElement = $(this);
+            var elementClass = clickedElement.attr("class");
+            var elementId = clickedElement.attr("id");
+            alert("Class: " + elementClass + "\nID: " + elementId);
+        });
+    });
+</script>
+
+</body>
+</html>

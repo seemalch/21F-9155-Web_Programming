@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Image Display</title>
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        #image-container {
+            display: none; /* Initially hide the image */
+        }
+    </style>
+</head>
+<body>
+
+<input type="file" id="seemal1" accept="image/*" > <!-- Input field for uploading image -->
+<button id="toggle-button" style="color: aliceblue; background-color: red;height:50px;width:100px;border:1px solid black;font-size:large">Show Image</button> <!-- Button for toggling image display -->
+
+<div id="image-container">
+    <img id="uploaded-image" src="#" alt="Uploaded Image">
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#seemal1").change(function(event){
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function(){
+                var imageDataUrl = reader.result;
+                $("#uploaded-image").attr("src", imageDataUrl);
+            }
+            reader.readAsDataURL(file);
+        });
+
+        $("#toggle-button").click(function(){
+            $("#image-container").toggle(); // Toggle image display
+            var buttonText = $("#toggle-button").text();
+            if (buttonText === "Show Image") {
+                $("#toggle-button").text("Hide Image");
+            } else {
+                $("#toggle-button").text("Show Image");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
